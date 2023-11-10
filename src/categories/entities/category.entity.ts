@@ -14,5 +14,5 @@ export class CategoryEntity extends BaseEntity {
   icon?: string;
 
   @OneToMany(() => ChapterEntity, (chapter) => chapter.cateogry)
-  chatpers: ChapterEntity[];
+  chapters: ChapterEntity[];
 }

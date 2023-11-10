@@ -3,7 +3,7 @@ import { CategoryDto } from './category.dto';
 
 export class CreateCategoryDto extends OmitType(CategoryDto, [
   'id',
-  'chatpers',
+  'chapters',
   'createdAt',
   'updatedAt',
   'deletedAt',

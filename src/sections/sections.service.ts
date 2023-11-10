@@ -5,8 +5,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { isEmpty, isNotEmpty, isUUID } from 'class-validator';
-import { IsNull, Not, Repository } from 'typeorm';
+import { isEmpty, isNotEmpty, isNotEmptyObject, isUUID } from 'class-validator';
+import { In, IsNull, Not, Repository } from 'typeorm';
 
 import { ChaptersService } from 'src/chapters/chapters.service';
 import { ChapterDto } from 'src/chapters/dto/chapter.dto';
@@ -39,12 +39,16 @@ export class SectionsService {
   }
 
   async findAll(query: FindSectionsDto): Promise<SectionEntity[]> {
-    const { chapterId } = query || {};
+    const { chapterIds } = query || {};
     return await this.sectionRepo
       .find({
-        relations: ['lessons'],
+        relations: {
+          lessons: true,
+        },
         where: {
-          chapter: isNotEmpty(chapterId) ? { id: chapterId } : Not(IsNull()),
+          chapter: isNotEmptyObject(chapterIds)
+            ? { id: In(chapterIds) }
+            : Not(IsNull()),
         },
       })
       .catch((error) => {
@@ -56,7 +60,7 @@ export class SectionsService {
 
   async findOne(id: string): Promise<SectionEntity> {
     const section = await this.sectionRepo.findOne({
-      relations: ['lessons'],
+      relations: { lessons: true },
       where: { id },
     });
     if (!section) throw new NotFoundException(`Section not found`);

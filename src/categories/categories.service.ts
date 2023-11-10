@@ -38,7 +38,7 @@ export class CategoriesService {
     return await this.categoryRepo
       .find({
         relations: {
-          chatpers: true,
+          chapters: true,
         },
       })
       .then((result) => result as CategoryDto[])
@@ -52,7 +52,7 @@ export class CategoriesService {
   async findOne(id: string): Promise<CategoryDto> {
     return await this.categoryRepo
       .findOne({
-        relations: { chatpers: true },
+        relations: { chapters: true },
         where: { id },
       })
       .then((res) => res as CategoryDto)

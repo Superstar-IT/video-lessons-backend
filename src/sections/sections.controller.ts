@@ -45,7 +45,10 @@ export class SectionsController {
   })
   @Get()
   async findAll(@Query() query: FindSectionsDto): Promise<SectionEntity[]> {
-    return await this.sectionsService.findAll(query);
+    return await this.sectionsService.findAll({
+      ...query,
+      chapterIds: query.chapterId ? [query.chapterId] : [],
+    });
   }
 
   @ApiOkResponse({

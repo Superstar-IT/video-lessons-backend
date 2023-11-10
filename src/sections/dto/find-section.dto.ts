@@ -13,4 +13,5 @@ export class FindSectionsDto {
   @ValidateIf((obj) => obj.chapterId !== undefined)
   @IsUUID(undefined, getValidateOptions(`Invalid chapter id`))
   chapterId?: string;
+  chapterIds?: string[];
 }

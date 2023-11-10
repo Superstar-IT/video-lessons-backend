@@ -16,7 +16,7 @@ export class ChapterEntity extends BaseEntity {
   @Column({ type: 'int', nullable: false, default: 0 })
   lessonCount: number;
 
-  @ManyToOne(() => CategoryEntity, (cateogry) => cateogry.chatpers, {
+  @ManyToOne(() => CategoryEntity, (cateogry) => cateogry.chapters, {
     cascade: ['insert', 'remove', 'soft-remove'],
   })
   cateogry: CategoryEntity;

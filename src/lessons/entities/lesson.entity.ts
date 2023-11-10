@@ -11,7 +11,7 @@ export class LessonEntity extends BaseEntity {
   description?: string;
 
   @Column({ type: 'text', nullable: false })
-  teachterName: string;
+  teacherName: string;
 
   @Column({ type: 'text', nullable: false })
   video: string;

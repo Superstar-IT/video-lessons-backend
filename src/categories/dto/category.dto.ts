@@ -45,7 +45,7 @@ export class CategoryDto {
     required: true,
     description: 'Chapter list of a given category',
   })
-  chatpers: ChapterDto[];
+  chapters: ChapterDto[];
 
   @ApiProperty({ type: Date, required: true })
   @IsNotEmpty()
