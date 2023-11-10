@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -15,7 +17,6 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
-import { isNotEmpty } from 'class-validator';
 import { CategoriesService } from 'src/categories/categories.service';
 import { ChaptersService } from './chapters.service';
 import { ChapterDto } from './dto/chapter.dto';
@@ -58,7 +59,12 @@ export class ChaptersController {
   }
 
   @ApiOkResponse({ type: ChapterDto, description: 'Get a chapter by id' })
-  @ApiParam({ type: String, required: true, name: 'chapterId' })
+  @ApiParam({
+    type: String,
+    required: true,
+    name: 'chapterId',
+    example: '00000000-0000-0000-0000-000000000000',
+  })
   @Get(':chapterId')
   findOne(@Param('chapterId') chapterId: string) {
     return this.chaptersService.findOne(chapterId);
@@ -68,7 +74,12 @@ export class ChaptersController {
     type: ChapterDto,
     description: 'Update a chapter by id and return the update chapter',
   })
-  @ApiParam({ type: String, required: true, name: 'chapterId' })
+  @ApiParam({
+    type: String,
+    required: true,
+    name: 'chapterId',
+    example: '00000000-0000-0000-0000-000000000000',
+  })
   @Patch(':chapterId')
   update(
     @Param('chapterId') chapterId: string,
@@ -77,11 +88,17 @@ export class ChaptersController {
     return this.chaptersService.update(chapterId, updateChapterDto);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse({
     type: null,
     description: 'Remove a chapter by id',
   })
-  @ApiParam({ type: String, required: true, name: 'chapterId' })
+  @ApiParam({
+    type: String,
+    required: true,
+    name: 'chapterId',
+    example: '00000000-0000-0000-0000-000000000000',
+  })
   @Delete(':chapterId')
   remove(@Param('chapterId') chapterId: string) {
     return this.chaptersService.remove(chapterId);

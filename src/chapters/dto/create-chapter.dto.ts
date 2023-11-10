@@ -14,6 +14,7 @@ export class CreateChapterDto extends OmitType(ChapterDto, [
     type: String,
     required: true,
     description: 'Category id of a new chapter',
+    example: '00000000-0000-0000-0000-000000000000',
   })
   @IsNotEmpty(getValidateOptions(`Category id required`))
   @IsUUID(undefined, getValidateOptions(`Invalid category id`))

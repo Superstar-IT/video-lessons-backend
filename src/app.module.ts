@@ -12,6 +12,8 @@ import appConfig from './config/app.config';
 import cacheConfig from './config/cache.config';
 import dbConfig from './config/db.config';
 import { TypeOrmConfigService } from './database/typeorm-config.service';
+import { SectionsModule } from './sections/sections.module';
+import { LessonsModule } from './lessons/lessons.module';
 
 @Module({
   imports: [
@@ -37,6 +39,8 @@ import { TypeOrmConfigService } from './database/typeorm-config.service';
     }),
     CategoriesModule,
     ChaptersModule,
+    SectionsModule,
+    LessonsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
