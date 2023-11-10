@@ -7,6 +7,7 @@ import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CategoriesModule } from './categories/categories.module';
+import { ChaptersModule } from './chapters/chapters.module';
 import appConfig from './config/app.config';
 import cacheConfig from './config/cache.config';
 import dbConfig from './config/db.config';
@@ -35,6 +36,7 @@ import { TypeOrmConfigService } from './database/typeorm-config.service';
       },
     }),
     CategoriesModule,
+    ChaptersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

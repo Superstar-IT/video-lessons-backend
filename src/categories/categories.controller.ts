@@ -23,8 +23,8 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CategoryDto } from './dto/category.dto';
 import { isEmpty, isNotEmptyObject, isUUID } from 'class-validator';
-import { ChapterDto } from './dto/chapter.dto';
-import { CreateChapterDto } from './dto/create-chapter.dto';
+import { ChapterDto } from '../chapters/dto/chapter.dto';
+import { CreateChapterDto } from '../chapters/dto/create-chapter.dto';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -126,32 +126,5 @@ export class CategoriesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.categoriesService.remove(id);
-  }
-
-  @ApiOkResponse({
-    type: ChapterDto,
-    description: 'Add a new chapter to a given category',
-  })
-  @ApiParam({
-    type: String,
-    required: true,
-    name: 'categoryId',
-    description: 'Category id',
-    example: '00000000-0000-0000-0000-000000000000',
-  })
-  @ApiBody({
-    type: CreateChapterDto,
-    required: true,
-    description: 'New chapter details',
-  })
-  @Post(':categoryId/chapters')
-  async addChapter(
-    @Param('categoryId') categoryId: string,
-    @Body() createChapterDto: CreateChapterDto,
-  ): Promise<ChapterDto> {
-    return await this.categoriesService.addChapter(
-      categoryId,
-      createChapterDto,
-    );
   }
 }

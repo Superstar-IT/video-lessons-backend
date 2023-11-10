@@ -1,8 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
 import { getValidateOptions } from 'src/core/validators/validation';
-import { ChapterEntity } from '../entities/chapter.entity';
-import { ChapterDto } from './chapter.dto';
+import { ChapterDto } from '../../chapters/dto/chapter.dto';
 
 export class CategoryDto {
   @ApiProperty({
@@ -46,7 +45,7 @@ export class CategoryDto {
     required: true,
     description: 'Chapter list of a given category',
   })
-  chatpers: ChapterEntity[];
+  chatpers: ChapterDto[];
 
   @ApiProperty({ type: Date, required: true })
   @IsNotEmpty()

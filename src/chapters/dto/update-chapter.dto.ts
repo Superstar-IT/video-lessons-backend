@@ -3,10 +3,10 @@ import { IsInt, IsOptional, Min, ValidateIf } from 'class-validator';
 import { getValidateOptions } from 'src/core/validators/validation';
 import { CreateChapterDto } from './create-chapter.dto';
 
-export class UpdateCategoryDto extends PartialType(CreateChapterDto) {
+export class UpdateChapterDto extends PartialType(CreateChapterDto) {
   @ApiProperty({
     type: Number,
-    required: true,
+    required: false,
     description: `Lessons count for a given category`,
     example: 0,
   })

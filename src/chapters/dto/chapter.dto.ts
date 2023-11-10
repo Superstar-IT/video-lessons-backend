@@ -7,6 +7,7 @@ import {
   IsUUID,
   Min,
 } from 'class-validator';
+import { CategoryEntity } from 'src/categories/entities/category.entity';
 import { getValidateOptions } from 'src/core/validators/validation';
 
 export class ChapterDto {
@@ -72,4 +73,5 @@ export class ChapterDto {
   @IsNotEmpty()
   @IsDate()
   deletedAt: Date;
+  cateogry: CategoryEntity;
 }

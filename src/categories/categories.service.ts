@@ -3,24 +3,19 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { getFromDto } from 'src/core/utils/repository.utils';
+import { Repository } from 'typeorm';
+import { CategoryDto } from './dto/category.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { CategoryDto } from './dto/category.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryEntity } from './entities/category.entity';
-import { Repository } from 'typeorm';
-import { getFromDto } from 'src/core/utils/repository.utils';
-import { CreateChapterDto } from './dto/create-chapter.dto';
-import { ChapterDto } from './dto/chapter.dto';
-import { ChapterEntity } from './entities/chapter.entity';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     @InjectRepository(CategoryEntity)
     private categoryRepo: Repository<CategoryEntity>,
-    @InjectRepository(ChapterEntity)
-    private chapterRepo: Repository<ChapterEntity>,
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto): Promise<CategoryDto> {
@@ -87,28 +82,6 @@ export class CategoriesService {
       .catch((error) => {
         throw new InternalServerErrorException(
           `Failed to remove a category. ${error.message}`,
-        );
-      });
-  }
-
-  async addChapter(
-    categoryId: string,
-    createChapterDto: CreateChapterDto,
-  ): Promise<ChapterDto> {
-    const category = await this.findOne(categoryId);
-    if (!category) throw new NotFoundException(`Category not found!`);
-    const newChapter = getFromDto<ChapterEntity>(
-      createChapterDto,
-      new ChapterEntity(),
-    );
-    newChapter.cateogry = category;
-
-    return await this.chapterRepo
-      .save(newChapter)
-      .then((res) => res as ChapterDto)
-      .catch((error) => {
-        throw new InternalServerErrorException(
-          `Failed to add a new chapter. ${error.message}`,
         );
       });
   }

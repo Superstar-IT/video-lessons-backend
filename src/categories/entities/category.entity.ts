@@ -1,6 +1,6 @@
+import { ChapterEntity } from 'src/chapters/entities/chapter.entity';
 import { BaseEntity } from 'src/core/entities/base.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
-import { ChapterEntity } from './chapter.entity';
 
 @Entity('categories')
 export class CategoryEntity extends BaseEntity {
